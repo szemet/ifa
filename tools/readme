@@ -1,4 +1,5 @@
-Ezek a saját magamnak tákolt dolgok. Az eredetiektől alig-alig térnek el, de nekem így kényelmesebb. Használata csak saját felelősségre ajánlott.  
+Ezek a saját magamnak tákolt dolgok. Az eredetiektől alig-alig térnek el, de nekem így kényelmesebb. 
+Használatuk csak saját felelősségre ajánlott!  
 ###############################################################################
 
 online-db-gen.php - Online létrehozza az adatbázist (ifa.db). Argumentumként kell megadni az insert fájlt.
@@ -16,4 +17,4 @@ user.txt - Minta user fájl, felépítése:
               ===
               Diak Neve;did;oid,jelszó
 							
-.htacces - Generálás után a könyvtárba kell tenni.
+.htaccess - Generálás után a könyvtárba kell tenni.
