@@ -1,0 +1,5 @@
+Monoton Manó;117,tanárjelszó
+===
+d05a;2. A;117
+===
+Pumpa Pál;32;d05a,diákjelszó
