@@ -2,7 +2,7 @@ Ezek a saját magamnak tákolt dolgok. Az eredetiektől alig-alig térnek el, de
 Használatuk csak saját felelősségre ajánlott!  
 ###############################################################################
 
-online-db-gen.php - Online létrehozza az adatbázist (ifa.db). Argumentumként kell megadni az insert fájlt.
+online-db-gen.php - Online létrehozza az adatbázist (ifa.db). Argumentumként kell megadni az insert fájlt: hxxp://valami.hu/gen-db.php?arg=user.txt.insert
 
 schema.sql - Fontos a generáláshoz.
 
