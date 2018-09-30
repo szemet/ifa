@@ -1,5 +1,9 @@
 online-db-gen.php - Online létrehozza az adatbázist (ifa.db). Argumentumként kell megadni az insert fájlt.
+
 schema.sql - Fontos a generáláshoz.
-admin.pw - Admin jelszó (SHA256).
-gen-password.py - Insert fájlt készít az user fájlból.
+
+admin.pw - Admin jelszó (SHA256), kézzel készül. 
+
+gen-password.py - Insert fájlt készít az user fájlból. Jelszót NEM generál, az már az user.txt-ben benne kell legyen.
+
 user.txt - Minta user fájl.
