@@ -43,7 +43,7 @@ class Diak {
     }
 	function Diak($did)
     {
-        self::__construct();
+        self::__construct($did);
     }
 }
 
