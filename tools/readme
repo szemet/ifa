@@ -11,10 +11,10 @@ admin.pw - Admin jelszó (SHA256), kézzel készül.
 gen-password.py - Insert fájlt készít az user fájlból. Jelszót NEM generál, az már az user.txt-ben benne kell legyen.
 
 user.txt - Minta user fájl, felépítése:
-							Tanar Neve;tid,jelszó
-              ===
-              oid;Osztaly Neve;tid
-              ===
-              Diak Neve;did;oid,jelszó
+		Tanar Neve;tid,jelszó
+		===
+		oid;Osztaly Neve;tid
+		===
+		Diak Neve;did;oid,jelszó
 							
 .htaccess - Generálás után a könyvtárba kell tenni.
