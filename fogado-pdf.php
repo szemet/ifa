@@ -28,7 +28,8 @@ class PDF extends TCPDF
 #    private $X = $X1;
 
 #    var $defaultFont = 'times';
-    var $defaultFont = 'dejavusans';
+    //var $defaultFont = 'dejavusans';
+    var $defaultFont = 'aefurat';
     private $nameFont = ['B', 13];
     private $itemFont = ['', 11];
     private $szuloiFont = ['I', 11];
