@@ -58,7 +58,9 @@ class Tanar {
 
         if (count($rows) == 0) { die("Nincs ilyen tanár: $tid"); }
 
-        while(list($k, $v) = each($rows[0])) { $this->$k = $v; }
+        //while(list($k, $v) = each($rows[0])) { $this->$k = $v; }
+    	foreach ($rows[0] as $k => $v)			{ $this->$k = $v; }
+
 
         $q = "SELECT ido, diak, dnev || ' (' || onev || ')' AS dnev"
                 . "    FROM Fogado AS F"
@@ -96,6 +98,10 @@ class Tanar {
             $this->IDO_max = max(array_keys($this->fogado_ido)) + 1;
         }
 
+    }
+	 function Tanar($tid)
+    {
+        self::__construct($tid);
     }
 
 }
