@@ -257,15 +257,18 @@ Vege;
         //    $JelenVan['id'] (id, kezd, veg, tartam)
         //    $Szuloi['id'] (id, kezd, veg)
         reset($_REQUEST);
-        while (list($k, $v) = each ($_REQUEST)) {
-            if ( ereg ("^a([0-9]+)$", $k, $match) ) {
+        //while (list($k, $v) = each ($_REQUEST)) {
+            //if ( ereg ("^a([0-9]+)$", $k, $match) ) {
+ 		foreach($_REQUEST as $k => $v) {
+			if ( preg_match ("/^a([0-9]+)$/", $k, $match) ){
                 $id = $match[1];
                 $JelenVan[$id] = array('id' => $id,
                     'kezd' => $_REQUEST["b" . $id] + $_REQUEST["c" . $id],
                     'veg'  => $_REQUEST["d" . $id] + $_REQUEST["e" . $id],
                     'tartam' => $_REQUEST["f" . $id] );
             }
-            if ( ereg ("^g([0-9]+)$", $k, $match) ) {
+            //if ( ereg ("^g([0-9]+)$", $k, $match) ) {
+            if ( preg_match ("/^g([0-9]+)$/", $k, $match) )	{
                 $id = $match[1];
                 $Szuloi[$id] = array('id' => $id,
                     'kezd' => $_REQUEST["h" . $id] + $_REQUEST["i" . $id],
@@ -288,7 +291,8 @@ Vege;
             }
         }
 
-        if (sizeof($Szuloi) > 0) {
+        //if (sizeof($Szuloi) > 0) {
+        if (!empty($Szuloi)) {
             foreach ($Szuloi as $t) {
                 if ( $t['kezd'] && $t['veg'] && isset($JelenVan[$t['id']]) ) {
                     for ($i=$t['kezd']; $i<$t['veg']; $i++) $Tanar[$t['id']][$i]=-2;
@@ -301,7 +305,8 @@ Vege;
             $res = $db->prepare('INSERT INTO fogado VALUES (?, ?, ?, ?)');
             foreach ( array_keys($Tanar) as $id ) {
                 reset ($Tanar[$id]);
-                while (list ($key, $val) = each ($Tanar[$id])) {
+                //while (list ($key, $val) = each ($Tanar[$id])) {
+                foreach ($Tanar[$id] as $key => $val)					{ 
                     $res->execute( array($_REQUEST['fid'], $id, $key, $val) );
                 }
             }
