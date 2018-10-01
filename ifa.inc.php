@@ -77,7 +77,7 @@ define('fid', $FA->id);
  */
 function hiba($err, $utf=false) {
     if ($utf) header('Content-Type: text/html; charset=utf-8');
-    print "<p><hr><b>!!! - $err - !!!</b><hr>\n";
+    print "<p><hr><b><h2><font color=\"red\">!!! - $err - !!!</color></h2></b><hr>\n";
     Ulog (0, $err);
 }
 
