@@ -223,7 +223,7 @@ if (ADMIN) {
         }
     }
     $TABLA .= "</table>\n<!--#-->";
-	$TABLA = preg_replace('/<!--#-->/', '<br><input type="button" value="Nyomtatás" onClick="window.print()">', $TABLA);
+    $TABLA = preg_replace('/<!--#-->/', '<span class="noprint sans"><br><input type="button" value="Nyomtatás" onClick="window.print()"></span>', $TABLA);
 
 }
 
