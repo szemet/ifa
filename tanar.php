@@ -110,7 +110,7 @@ $onev = $res->fetchColumn();
 $Fejlec = "\n<table width='100%'><tr>\n"
     . "<td><h3>" . $TANAR->tnev .  " (" . $FA->datum . ")$onev</h3></td>\n"
     . "<td align='right'><span class='noprint sans'>\n"
-    . "<a href='" . $_SERVER['PHP_SELF'] . "?id=" . $TANAR->id . "&amp;kilep='> Kilépés </a>\n<!--#--></span></td></tr></table>\n";
+    . "<a href='" . $_SERVER['PHP_SELF'] . "?id=" . $TANAR->id . "&amp;kilep='> Kilépés </a>\n</span></td></tr></table>\n";
 
 if (ADMIN) {
     # A külső táblázat első cellájában az időpont-lista
@@ -221,9 +221,9 @@ if (ADMIN) {
             $TABLA .= '<td' . ($diak=='-2'?' class="szuloi"':'') . '>' . FiveToString($ido)
                 . '<td> &ndash; </td><td>' . ($diak>0?$TANAR->fogado_ido[$ido]['dnev']:'&nbsp;') . "</td></tr>\n";
         }
-        $Fejlec = preg_replace('/<!--#-->/', '<br><input type="button" value="Nyomtatás" onClick="window.print()">', $Fejlec);
     }
-    $TABLA .= "</table>\n";
+    $TABLA .= "</table>\n<!--#-->";
+	$TABLA = preg_replace('/<!--#-->/', '<br><input type="button" value="Nyomtatás" onClick="window.print()">', $TABLA);
 
 }
 
