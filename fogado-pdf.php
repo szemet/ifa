@@ -126,7 +126,8 @@ class TanarLista
 }
 
 $pdf = new PDF();
-$res = $db->query( "SELECT id FROM Tanar ORDER BY tnev;" );
+//$res = $db->query( "SELECT id FROM Tanar ORDER BY tnev;" );
+$res = $db->query( "SELECT id FROM Tanar WHERE id IN (SELECT DISTINCT  tanar FROM Fogado WHERE diak > 0) ORDER BY tnev;" );
 foreach($res->fetchAll() as $tanar) {
     $TANAR = new Tanar($tanar['id']);
 
