@@ -256,6 +256,7 @@ Vege;
         //    $JelenVan['id'] (id, kezd, veg, tartam)
         //    $Szuloi['id'] (id, kezd, veg)
         reset($_REQUEST);
+	$Szuloi = array();
         //while (list($k, $v) = each ($_REQUEST)) {
             //if ( ereg ("^a([0-9]+)$", $k, $match) ) {
  		foreach($_REQUEST as $k => $v) {
