@@ -66,7 +66,7 @@ class PDF extends TCPDF
 #        print $this->baseY . "\n";
         $Y = $this->y;
 
-        $this->putOszlop($tanar, $this->X);
+        $this->putTanar($tanar, $this->X);
 
         if ($this->PageNo() == $oldPageNo) {
             $this->commitTransaction();
@@ -79,11 +79,11 @@ class PDF extends TCPDF
                 $this->X = $this->X1;
                 $this->AddPage();
             }
-            $this->putOszlop($tanar, $this->X);
+            $this->putTanar($tanar, $this->X);
         }
     }
 
-    private function putOszlop($tanar, $x) {
+    private function putTanar($tanar, $x) {
         $this->mySetFont($this->nameFont);
 
         /* A kezdő vonalat vastagabban rajzoljuk */
@@ -127,7 +127,7 @@ class TanarLista
 
 $pdf = new PDF();
 //$res = $db->query( "SELECT id FROM Tanar ORDER BY tnev;" );
-$res = $db->query( "SELECT id FROM Tanar WHERE id IN (SELECT DISTINCT  tanar FROM Fogado WHERE diak > 0) ORDER BY tnev;" );
+$res = $db->query( "SELECT id FROM Tanar WHERE id IN (SELECT DISTINCT tanar FROM Fogado WHERE diak > 0) ORDER BY tnev;" );
 foreach($res->fetchAll() as $tanar) {
     $TANAR = new Tanar($tanar['id']);
 
@@ -135,11 +135,11 @@ foreach($res->fetchAll() as $tanar) {
     if (isset($TANAR->IDO_min)) {
         $voltSzuloi = false;
         $t = new TanarLista($TANAR->tnev);
-        for ($ido = $TANAR->IDO_min; $ido<$TANAR->IDO_max; $ido++) {
-            if (isset($TANAR->fogado_ido[$ido]['diak'])) {
+        foreach ($TANAR->fogado_ido as $ido => $bejegyzes) {
+            if (isset($bejegyzes['diak'])) {
                 $fogadoIdo = FiveToString($ido);
-                $fogadoNev = $TANAR->fogado_ido[$ido]['dnev'];
-                if ($TANAR->fogado_ido[$ido]['diak'] == '-2') {
+                $fogadoNev = $bejegyzes['dnev'];
+                if ($bejegyzes['diak'] == '-2') {
                     if (!$voltSzuloi) {
                         $fogadoNev = 'Szülői értekezlet';
                         $voltSzuloi = true;
