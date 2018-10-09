@@ -41,8 +41,17 @@ if(isset($_REQUEST['error'])) {
 }
 
 /** $Out - ebbe gyűjtjük a kimenetet */
-$Out = "\n<table width=\"100%\"><tr><td>\n"
-    . "<b><font color=\"#777777\">" . $_SESSION['nev'] . "</font></b>\n"
+$Out = "<link rel=\"stylesheet\" type=\"text/css\" href=\"https://cdn.datatables.net/v/dt/jq-3.3.1/dt-1.10.18/datatables.min.css\"/>\n<script type=\"text/javascript\" src=\"https://cdn.datatables.net/v/dt/jq-3.3.1/dt-1.10.18/datatables.min.js\"></script>\n" 
+    . "<script>
+$(document).ready(function(){
+    $(\"button\").click(function(){
+        $(\"#hide\").toggle();
+    });
+    $('#logins').wrap('<div id=\"hide\" style=\"display:none\"/>');
+});
+</script>"
+    . "\n<table width=\"100%\"><tr><td>\n"
+    . "<b><font color=\"#777777\">" . $_SESSION['nev'] . "</font></b> - <button>Adatbázis műveletek mutatása (be/ki)</button>\n"
     . '<td align="right" valign="top" class="sans"><a href="' . $_SERVER['PHP_SELF'] . "?kilep=\">Kilépés</a>\n</table>\n\n"
     . "<hr>\n\n";
 
@@ -55,7 +64,26 @@ switch ($_REQUEST['page']) {
     case 0:
         if ($FA) $Out .= "<h3>Az aktuális (legutóbb bejegyzett) fogadóóra: &nbsp;" . $FA->datum_str . "</h3>\n<ul>\n";
                  $Out .= "<li><a href=\"admin.php?page=1\">Új időpont létrehozása</a>\n";
-        if ($FA) $Out .= "<li><a href=\"".__TABLE__."\" target=\"_blank\">Táblázat letöltése (" . preg_replace('/.*-(.*)\..*/', '\1', __TABLE__) . ")</a>\n</ul>\n\n";        break;
+        if ($FA) $Out .= "<li><a href=\"".__TABLE__."\" target=\"_blank\">Táblázat letöltése (" . preg_replace('/.*-(.*)\..*/', '\1', __TABLE__) . ")</a>\n</ul>\n\n";
+		$logins = $db->query( "SELECT id,ido,uid,host,log FROM Ulog;");
+		$html_table = '<script>
+$(document).ready( function () {
+	$(\'#logins\').DataTable({
+		"autoWidth": true,
+		"pagingType": "full_numbers",
+		"pageLength": 10,
+		"order": [[ 0, "desc" ]], 
+		"columnDefs": [{"className": "dt-center", "targets": "_all", "visible": true }]
+	});	
+});
+</script>';
+		$html_table .= '<hr><table id="logins" class="cell-border compact stripe"><thead><tr><th>ID</th><th>Időpont</th><th>UserID</th><th>IP</th><th>data</th></tr></thead>';
+			foreach($logins as $row) {
+			$html_table .= '<tr><td>' .$row['id']. '</td><td>' .$row['ido']. '</td><td>' .$row['uid']. '</td><td>' .$row['host']. '</td><td>' .$row['log']. '</td></tr>';
+			}
+		$html_table .= '</table>';
+				if ($FA) $Out .= $html_table;
+        break;
 
     case 1:  // 1. ADMIN OLDAL
         $MaiDatum = date('Y-m-d');
